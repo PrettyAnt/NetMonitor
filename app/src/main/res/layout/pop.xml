@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+<!--使用RelativeLayout包裹ImageView，增加实际可点击的区域面积-->
+    <RelativeLayout
+        android:id="@+id/rl_left_close"
+        android:layout_width="15dp"
+        android:layout_height="15dp">
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/icon_pop_close"
+            />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_menu"
+        android:layout_marginTop="8dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@mipmap/ic_launcher"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_right_close"
+        android:layout_width="15dp"
+        android:layout_height="15dp">
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/icon_pop_close"
+            />
+    </RelativeLayout>
+
+
+</LinearLayout>
