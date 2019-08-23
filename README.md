@@ -1,4 +1,4 @@
-# MyFloatingWindow 仿360悬浮窗
+# MyFloatingWindow 
 
    ## 特点&关键方法：
     
