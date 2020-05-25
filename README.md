@@ -19,5 +19,7 @@
   + 之前版本会在每个activity中的onResume()中控制显示,onStop()中控制隐藏,因为popupwindow的创建需要在View绘制完毕之后,所以新版本改为在onWindowFocusChanged(boolean hasFocus)中
   控制是否显示问题
   
-  毕生心血都在这里啦,[转载请标明出处](https://github.com/PrettyAnt/NetMonitor),不胜感激
+  
+  毕生心血都在这里啦,[转载请标明出处](https://github.com/PrettyAnt/NetMonitor),不胜感激!  
+  
   [我的个人博客网站](https://prettyant.com/),里面总有你喜欢的😏
