@@ -1,4 +1,4 @@
-package com.example.fangli.myfloatingwindow.view;
+package com.example.netmonitor.ui.widget;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -17,7 +17,8 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.example.fangli.myfloatingwindow.R;
+import com.example.netmonitor.R;
+
 
 /**
  * Created by chenyu.
@@ -25,68 +26,75 @@ import com.example.fangli.myfloatingwindow.R;
  * Author'github https://github.com/PrettyAnt
  */
 
-public class MyPopupWindow extends PopupWindow implements View.OnClickListener, View.OnTouchListener {
-    private static final MyPopupWindow myPopupWindow = new MyPopupWindow();
+public class PopNetMonitorWindow extends PopupWindow implements View.OnClickListener, View.OnTouchListener {
+    private static PopNetMonitorWindow popNetMonitorWindow;
+    private      static   Context            mContext;
+    private static float               currentX = 0;//静态的，记录当前位置，跳转到下个页面时还在此位置
+    private static float               currentY = 0;
+    private        RelativeLayout      rl_left_close;
+    private        RelativeLayout      rl_right_close;
+    private        ImageView           iv_menu;
+    private        WindowManager       windowManager;
+    private        View                popInflate;
     private Activity activity;
-    private static float currentX = 0;
-    private static float currentY = 0;
-    private RelativeLayout rl_left_close;
-    private RelativeLayout rl_right_close;
-    private ImageView iv_menu;
-    WindowManager windowManager;
-    private View popInflate;
 
-    public static MyPopupWindow getInstance() {
-        return myPopupWindow;
+    private static PopNetMonitorWindow getInstance() {
+        if (popNetMonitorWindow == null) {
+            synchronized (PopNetMonitorWindow.class) {
+                if (popNetMonitorWindow == null) {
+                    popNetMonitorWindow = new PopNetMonitorWindow();
+                }
+            }
+        }
+
+        return popNetMonitorWindow;
     }
 
-    private MyPopupWindow() {
+    private PopNetMonitorWindow() {
+    }
+
+    public  static PopNetMonitorWindow initParams(Context context) {
+        getInstance();
+        mContext = context;
+        currentX = context.getResources().getDisplayMetrics().widthPixels;
+        currentY = context.getResources().getDisplayMetrics().heightPixels / 2;
+        return popNetMonitorWindow;
     }
 
     /**
      * 显示悬浮框
      *
-     * @param activity
      */
-    public void showMyPop(Activity activity) {
+    public void showNetMonitor(Activity activity) {
         this.activity = activity;
         init(activity);
-        if (currentX == 0 && currentY == 0) {
-            currentX = activity.getResources().getDisplayMetrics().widthPixels;
-            currentY = activity.getResources().getDisplayMetrics().heightPixels / 2;
-        }
-//部分2k屏手机不适配，所以没用此方法
-//            getInstance(context).showAtLocation(context.getWindow().getDecorView(),
-//                    Gravity.RIGHT|Gravity.CENTER_VERTICAL,
-//                    (int) currentX,
-//                    (int) currentY);
-        myPopupWindow.showAtLocation(activity.getWindow().getDecorView(),
+        popNetMonitorWindow.showAtLocation(activity.getWindow().getDecorView(),
                 Gravity.NO_GRAVITY,
                 (int) currentX,
                 (int) currentY);
 
     }
 
-    public static void hindMyPop() {
-        if (myPopupWindow == null) {
+    public  void hindNetMonitor() {
+        if (popNetMonitorWindow == null) {
             return;
         }
-        if (myPopupWindow.isShowing()) {
-            myPopupWindow.dismiss();
+        if (popNetMonitorWindow.isShowing()) {
+            popNetMonitorWindow.dismiss();
         }
     }
 
     /**
      * 初始化
      *
-     * @param activity
+     * @param context
      */
     @SuppressLint("ServiceCast")
-    private void init(Activity activity) {
-        LayoutInflater inflater = (LayoutInflater) activity
+    private void init(Context context) {
+        LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         popInflate = inflater.inflate(R.layout.pop, null);
-        windowManager = (WindowManager) activity.getSystemService(Context.WINDOW_SERVICE);
+        windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         this.setContentView(popInflate);
         if (getScreenWidth() < 800) {
             this.setWidth(108);
@@ -122,13 +130,13 @@ public class MyPopupWindow extends PopupWindow implements View.OnClickListener, 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.rl_left_close:
-                hindMyPop();
+                hindNetMonitor();
                 break;
             case R.id.rl_right_close:
-                hindMyPop();
+                hindNetMonitor();
                 break;
             case R.id.iv_menu:
-                Toast.makeText(activity, "喜欢就点下关注哦，谢谢啦~", Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, "喜欢就点下关注哦，谢谢啦~", Toast.LENGTH_LONG).show();
                 break;
         }
     }
@@ -213,7 +221,7 @@ public class MyPopupWindow extends PopupWindow implements View.OnClickListener, 
 
     //获取屏幕宽度
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-    public int getScreenWidth() {
+    private int getScreenWidth() {
         Point point = new Point();
         windowManager.getDefaultDisplay().getSize(point);
         return point.x;
@@ -221,7 +229,7 @@ public class MyPopupWindow extends PopupWindow implements View.OnClickListener, 
 
     //获取屏幕高度
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-    public int getScreenHeight() {
+    private int getScreenHeight() {
         Point point = new Point();
         windowManager.getDefaultDisplay().getSize(point);
         return point.y;
