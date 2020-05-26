@@ -2,9 +2,7 @@
 
 ## 特点&关键方法：
     
-  + 本悬浮窗NetMonitor**不需要**申请任何权限 
-  ---
-  (**传统**悬浮窗6.0以下需要申请 android.permission.SYSTEM_ALERT_WINDOW 权限,6.0以上还要在此基础上再加上动态权限判断)
+  + 本悬浮窗NetMonitor**不需要**申请任何权限 (**传统**悬浮窗6.0以下需要申请 android.permission.SYSTEM_ALERT_WINDOW 权限,6.0以上还要在此基础上再加上动态权限判断)
   
   + 在整个应用的入口Application中注册并初始化,PopNetMonitorWindow.initParams(this)
   
@@ -26,6 +24,6 @@
   控制是否显示问题
   
   
-  毕生心血都在这里啦,[转载请标明出处](https://github.com/PrettyAnt/NetMonitor),不胜感激!  
+  毕生心血都在这里啦,转载请标明[出处](https://github.com/PrettyAnt/NetMonitor),不胜感激!  
   
-  [我的个人博客网站](https://prettyant.com/),里面总有你喜欢的😏
+ 我的[个人博客](https://prettyant.com/)网站,里面总有你喜欢的😏
