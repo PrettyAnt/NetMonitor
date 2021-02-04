@@ -1,5 +1,8 @@
 # NetMonitor 
 
+## 效果图
+![image](img/效果图.gif)
+
 ## 特点&关键方法：
     
   + 本悬浮窗NetMonitor**不需要**申请任何权限 (**传统**悬浮窗6.0以下需要申请 android.permission.SYSTEM_ALERT_WINDOW 权限,6.0以上还要在此基础上再加上动态权限判断)
