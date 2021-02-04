@@ -19,7 +19,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        popNetMonitorWindow = PopNetMonitorWindow.initParams(this);
+        popNetMonitorWindow = PopNetMonitorWindow.getInstance().regist(this);
     }
 
     public PopNetMonitorWindow getPopNetMonitorWindow() {

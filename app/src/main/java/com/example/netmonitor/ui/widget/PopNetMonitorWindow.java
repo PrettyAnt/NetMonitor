@@ -28,17 +28,19 @@ import com.example.netmonitor.R;
 
 public class PopNetMonitorWindow extends PopupWindow implements View.OnClickListener, View.OnTouchListener {
     private static PopNetMonitorWindow popNetMonitorWindow;
-    private      static   Context            mContext;
-    private static float               currentX = 0;//静态的，记录当前位置，跳转到下个页面时还在此位置
-    private static float               currentY = 0;
+    private        float               currentX = 0;//记录当前位置，跳转到下个页面时还在此位置
+    private        float               currentY = 0;
     private        RelativeLayout      rl_left_close;
     private        RelativeLayout      rl_right_close;
     private        ImageView           iv_menu;
     private        WindowManager       windowManager;
     private        View                popInflate;
-    private Activity activity;
+    private        Activity            activity;
 
-    private static PopNetMonitorWindow getInstance() {
+    private PopNetMonitorWindow() {
+    }
+
+    public static PopNetMonitorWindow getInstance() {
         if (popNetMonitorWindow == null) {
             synchronized (PopNetMonitorWindow.class) {
                 if (popNetMonitorWindow == null) {
@@ -50,37 +52,38 @@ public class PopNetMonitorWindow extends PopupWindow implements View.OnClickList
         return popNetMonitorWindow;
     }
 
-    private PopNetMonitorWindow() {
-    }
-
-    public  static PopNetMonitorWindow initParams(Context context) {
-        getInstance();
-        mContext = context;
+    /**
+     * 注册
+     * 获取参数信息
+     *
+     * @param context
+     * @return
+     */
+    public PopNetMonitorWindow regist(Context context) {
         currentX = context.getResources().getDisplayMetrics().widthPixels;
         currentY = context.getResources().getDisplayMetrics().heightPixels / 2;
-        return popNetMonitorWindow;
+        return this;
     }
 
     /**
      * 显示悬浮框
-     *
      */
     public void showNetMonitor(Activity activity) {
         this.activity = activity;
         init(activity);
-        popNetMonitorWindow.showAtLocation(activity.getWindow().getDecorView(),
+        showAtLocation(activity.getWindow().getDecorView(),
                 Gravity.NO_GRAVITY,
                 (int) currentX,
                 (int) currentY);
 
     }
 
-    public  void hindNetMonitor() {
-        if (popNetMonitorWindow == null) {
-            return;
-        }
-        if (popNetMonitorWindow.isShowing()) {
-            popNetMonitorWindow.dismiss();
+    /**
+     * 隐藏悬浮窗
+     */
+    public void hindNetMonitor() {
+        if (isShowing()) {
+            dismiss();
         }
     }
 
@@ -136,15 +139,15 @@ public class PopNetMonitorWindow extends PopupWindow implements View.OnClickList
                 hindNetMonitor();
                 break;
             case R.id.iv_menu:
-                Toast.makeText(mContext, "喜欢就点下关注哦，谢谢啦~", Toast.LENGTH_LONG).show();
+                Toast.makeText(activity, "喜欢就点下关注哦，谢谢啦~", Toast.LENGTH_LONG).show();
                 break;
         }
     }
 
-    private float startX = 0;
-    private float startY = 0;
-    private long endTime;
-    private long beginTime = 0;
+    private float startX    = 0;
+    private float startY    = 0;
+    private long  endTime;
+    private long  beginTime = 0;
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
@@ -159,7 +162,6 @@ public class PopNetMonitorWindow extends PopupWindow implements View.OnClickList
                     endTime = System.currentTimeMillis();
 
                     if (endTime - beginTime < 1000) {//当两次按下的时间间隔小于300ms，就将此事件消费掉，不再向下传递
-//                              Toast.makeText(getApplicationContext(), "时长大于一秒", Toast.LENGTH_SHORT).show();
                         beginTime = endTime;
                         return true;
                     }
