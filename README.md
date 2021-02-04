@@ -1,7 +1,7 @@
 # NetMonitor 
 
 ## 效果图
-![image](img/效果图.gif)
+![image](img/moniter.gif)
 
 ## 特点&关键方法：
     
