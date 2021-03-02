@@ -1,10 +1,12 @@
 package com.example.netmonitor.ui.base;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.netmonitor.ui.application.App;
 import com.example.netmonitor.ui.widget.PopNetMonitorWindow;
+
 /**
  * @author ChenYu
  * Author's github https://github.com/PrettyAnt
@@ -15,7 +17,7 @@ import com.example.netmonitor.ui.widget.PopNetMonitorWindow;
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
-    public  PopNetMonitorWindow popNetMonitorWindow;
+    public PopNetMonitorWindow popNetMonitorWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +38,10 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     /**
      * 默认情况下为隐藏悬浮框，控制权交给子类处理
-     * @return  true 显示悬浮窗  false 隐藏悬浮窗
+     *
+     * @return true 显示悬浮窗  false 隐藏悬浮窗
      */
-    protected  boolean netMonitorIsVisible(){
+    protected boolean netMonitorIsVisible() {
         return false;
     }
 }
